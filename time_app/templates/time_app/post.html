@@ -3,7 +3,7 @@
 {% block title %}Post{% endblock %}
 
 {% block header %}
-<h1 class="display-4 text-secondary">Post</h1>
+<h1 class="display-4 text-secondary">POST</h1>
 <p class="caption">※投稿先のグループを選択し、
   メッセージを投稿します。</p>
 {% if messages %}
@@ -20,6 +20,6 @@
 <form action="{% url 'post' %}" method="post">
 {% csrf_token %}
 {{form.as_p}}
-<button class="btn text-light" style="background-color: #b899ff;">Post!</button>
+<button class="btn text-light" style="background-color: #b899ff;">投稿</button>
 </form>
 {% endblock %}

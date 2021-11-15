@@ -12,19 +12,30 @@
 </head>
 <body class="container" style="background-color: #f1ebff;">
   <!-- ナビゲーションバー -->
-  <nav class="navbar navbar-expand navbar-light bg-light">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link font-weight-bold" style="color: #b899ff;" href="{% url 'index' %}">Time Schedule</a>
+  <nav class="navbar navbar-expand navbar-light bg-light ">
+  <ul class="navbar-nav mr-auto">
+      <li class="col">
+        <a class="nav-link font-weight-italic" style="color: #b899ff;" href="{% url 'index' %}">Time Schedule</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'post' %}">post</a>
+        <a class="nav-link" href="{% url 'index' %}">ホーム</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'groups' %}">group</a>
+        <a class="nav-link" href="#">ランキング</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">タグ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">お問合せ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'post' %}">投稿</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">{{login_user}}</a>
       </li>
     </ul>
-    <span>logined: <span class="h6">"{{login_user}}".</span></span>
   </nav>
 
   <div>{% block header %}
@@ -37,7 +48,7 @@
       <footer class="d-flex flex-wrap justify-content-between align-items-center py-3">
         <div class="my-4 col-md-4 d-flex">
           <span class="font-weight-bold">
-            <a style="color: #b899ff;" href="/admin/layout?next=/time_app/">
+            <a class="text-secondary" href="/admin/layout?next=/time_app/">
               [ logout ]</a>
           </span>
         </div>
