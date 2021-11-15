@@ -44,13 +44,13 @@ def index(request, page=1):
     # メッセージの取得
     messages = get_your_group_message(request.user, glist, page)
     
-    # 共通処理
-    params = {
-      'login_user':request.user,
-      'contents':messages,
-      'check_form':checkform,
-    }
-    return render(request, 'time_app/index.html', params)
+  # 共通処理
+  params = {
+    'login_user':request.user,
+    'contents':messages,
+    'check_form':checkform,
+  }
+  return render(request, 'time_app/index.html', params)
 
 @login_required(login_url='/admin/login/')
 def groups(request):
@@ -63,7 +63,7 @@ def groups(request):
     #Groupsメニュー選択肢の処理
     if request.POST['mode'] == '__groups_form__':
       # 選択したGroup名を取得
-      sel_group = request.POST['groups']
+      sel_group = request.POST.get('groups')
       # Groupを取得
       gp = Group.objects.filter(owner = request.user) \
         .filter(title=sel_group).first()
@@ -83,7 +83,7 @@ def groups(request):
     # Friendsのチェック更新時の処理
     if request.POST['mode'] == '__friends_form__':
       # 選択したGroupの取得
-      sel_group = request.POST['group']
+      sel_group = request.POST.get('group')
       group_obj = Group.objects.filter(title = sel_group).first()
       print(group_obj)
       # チェックしたFriendsを取得
@@ -107,25 +107,26 @@ def groups(request):
         {'groups':sel_group})
       friendsform = FriendsForm(request.user, \
         friends = friends, vals = vlist)
-    
-    # GETアクセス時の処理
-    else:
-      # フォームの用意
-      groupsform = GroupSelectForm(request.user)
-      friendsform = FriendsForm(request.user, friends = friends, \
-        vals = [])
-      sel_group = '-'
 
-    # 共通処理
-    createform = CreateGroupForm()
-    params = {
-      'login_user':request.user,
-      'groups_form':groupsform,
-      'friends_form':friendsform,
-      'create_form':createform,
-      'group':sel_group,
-    }
-    return render(request, 'time_app/groups.html', params)
+  # GETアクセス時の処理
+  else:
+    # フォームの用意
+    groupsform = GroupSelectForm(request.user)
+    friendsform = FriendsForm(request.user, friends = friends, \
+        vals = [])
+    sel_group = '-'
+
+  # 共通処理
+  createform = CreateGroupForm()
+  params = {
+    'login_user':request.user,
+    'groups_form':groupsform,
+    'friends_form':friendsform,
+    'create_form':createform,
+    'group':sel_group,
+  }
+  return render(request, 'time_app/groups.html', params)
+
 
 # Friendsの追加処理
 @login_required(login_url = '/admin/login/')

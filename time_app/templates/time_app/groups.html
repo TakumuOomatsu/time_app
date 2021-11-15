@@ -2,7 +2,7 @@
 
 {% block title %}Groups{% endblock %}
 {% block header %}
-<h1 class="display-4 text-primary">Group</h1>
+<h1 class="display-4 text-secondary">Group</h1>
 <p class="caption">※グループを選択してselect memberすると、
   そのグループに登録されている利用者がONになります。
   利用者のチェックをONにしてset memberすると、ONにしてある
@@ -22,7 +22,7 @@
 {% csrf_token %}
 <input type="hidden" name="mode" value="__groups_form__">
 {{groups_form}}
-<button class="btn btn-primary mt-1">select members</button>
+<button class="btn mt-1 text-light" style="background-color: #b899ff;">select members</button>
 </form>
 <hr>
 <form action="{% url 'groups' %}" method="post">
@@ -30,13 +30,13 @@
 <input type="hidden" name="mode" value="__friends_form__">
 <input type="hidden" name="group" value="{{group}}">
 {{friends_form}}
-<button class="btn btn-primary mt-0">set members</button>
+<button class="btn mt-0 text-light" style="background-color: #b899ff;">set members</button>
 </form>
 <hr>
 <p>※新しいGroupの登録</p>
 <form action="{% url 'creategroup' %}" method="post">
 {% csrf_token %}
 {{create_form}}
-<button class="btn btn-primary mt-1">create new group</button>
+<button class="btn mt-1 text-light" style="background-color: #b899ff;">create new group</button>
 </form>
 {% endblock %}

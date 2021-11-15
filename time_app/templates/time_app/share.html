@@ -1,9 +1,9 @@
 {% extends 'time_app/layout.html' %}
 
-{% blocktitle %}Share{% endblock %}
+{% block title %}Share{% endblock %}
 
 {% block header %}
-<h1 class="display-4 text-primary">Share</h1>
+<h1 class="display-4 text-secondary">Share</h1>
 <p class="caption">※投稿先のグループを選択し、
   下のメッセージをシェアします。</p>
 {% if messages %}
@@ -22,6 +22,6 @@
 <form action="{% url 'share' share.id %}" method="post">
 {% csrf_token %}
 {{form.as_p}}
-<button class="btn btn-primary mt-2">Share!</button>
+<button class="btn mt-2 text-light" style="background-color: #b899ff;">Share!</button>
 </form>
 {% endblock %}

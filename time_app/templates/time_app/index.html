@@ -9,7 +9,7 @@
     document.group_form.submit();
   }
 </script>
-<h1 class="display-4 text-primary">SNS</h1>
+<h1 class="display-4 text-secondary">SNS</h1>
 <p>※グループのチェックをONにしてupdateすると、
   グループに登録されている利用者のメッセージだけが表示されます。</p>
 {% if messages %}
@@ -30,7 +30,7 @@
     {% csrf_token %}
     {{check_form}}
     <div>
-      <button class="btn btn-primary">update</button>
+      <button class="btn text-light" style="background-color: #b899ff;">update</button>
     </div>
   </form>
 </div>
