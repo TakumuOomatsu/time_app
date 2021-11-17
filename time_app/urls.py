@@ -10,4 +10,6 @@ urlpatterns = [
   path('post', views.post, name='post'),
   path('share/<int:share_id>', views.share, name='share'),
   path('good/<int:good_id>', views.good, name='good'),
+  # お問合せのURLパターン 本-------------------------------------------------
+  path('contact/', views.ContactView.as_view(), name='contact'),
 ]

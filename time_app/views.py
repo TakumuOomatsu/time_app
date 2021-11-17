@@ -9,6 +9,11 @@ from django.contrib.auth.decorators import login_required
 from .models import Message, Friend, Group, Good
 from .forms import GroupCheckForm, GroupSelectForm, \
   FriendsForm, CreateGroupForm, PostForm
+# ---------------------------------------------------------------------
+from django.views.generic import ListView, DetailView
+from django.views.generic import FormView
+from django.urls import reverse_lazy
+from .forms import ContactForm
 
 # Create your views here.
 
@@ -243,7 +248,6 @@ def share(request, share_id):
     'share':share,
   }
   return render(request, 'time_app/share.html', params)
-
 # Goodボタンの処理
 @login_required(login_url='/admin/login/')
 def good(request, good_id):
@@ -303,3 +307,15 @@ def get_public():
   public_group = Group.objects.filter \
     (owner = public_user).first()
   return (public_user, public_group)
+
+  # お問合せページ----------------------------------------------------------
+class ContactView(FormView):
+  template_name = 'contact.html'
+  form_class = ContactForm
+  success_url = reverse_lazy('blog:contact')
+
+  def form_valid(self, form):
+    form.send_email()
+    messages.success(
+      self.request, 'お問合せは正常に送信されました。')
+    return super().form_valid(form)
