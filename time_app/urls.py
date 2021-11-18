@@ -11,5 +11,5 @@ urlpatterns = [
   path('share/<int:share_id>', views.share, name='share'),
   path('good/<int:good_id>', views.good, name='good'),
   # お問合せのURLパターン 本-------------------------------------------------
-  path('contact/', views.ContactView.as_view(), name='contact'),
+  path('contact/', views.contact, name='contact'),
 ]

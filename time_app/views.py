@@ -309,13 +309,10 @@ def get_public():
   return (public_user, public_group)
 
   # お問合せページ----------------------------------------------------------
-class ContactView(FormView):
-  template_name = 'contact.html'
-  form_class = ContactForm
-  success_url = reverse_lazy('blog:contact')
-
-  def form_valid(self, form):
-    form.send_email()
-    messages.success(
-      self.request, 'お問合せは正常に送信されました。')
-    return super().form_valid(form)
+def contact(request):
+  params = {
+    'login_user':request.user,
+    'contents':messages,
+    # 'check_form':checkform,
+  }
+  return render(request, 'time_app/contact.html', params)
