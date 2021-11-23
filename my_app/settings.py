@@ -75,6 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_app.wsgi.application'
 
+import dj_database_url
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
