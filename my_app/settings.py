@@ -24,13 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'herokuapp.com']
+# ALLOWED_HOSTS = ['127.0.0.1', 'herokuapp.com']
 ALLOWED_HOSTS = ['*']
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
 
 # Application definition
 
@@ -95,8 +91,6 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
-db_from_env = dj_database_url.config(conn_max_age=600, ssl_repuire = True)
-DATABASES['default'].update(db_from_env)
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -135,10 +129,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-if not DEBUG:
-    SECRET_KEY = os.environ['SECRET_KEY']
-    import django_heroku
-    django_heroku.settings(locals())
 
 # ---------------------------------------------------------------
 from django.contrib.messages import constants
@@ -146,3 +136,16 @@ from django.contrib.messages import constants
 MESSAGE_TAGS = {
     constants.SUCCESS:'alert alert-success',
 }
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_repuire = True)
+DATABASES['default'].update(db_from_env)
+
+if not DEBUG:
+    SECRET_KEY = os.environ['SECRET_KEY']
+    import django_heroku
+    django_heroku.settings(locals())
